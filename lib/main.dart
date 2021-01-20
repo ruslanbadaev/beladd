@@ -13,6 +13,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        appBarTheme: AppBarTheme(color: Colors.white),
+        textTheme: TextTheme(body1: TextStyle(color: Colors.blueGrey)),
+      ),
+      darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          appBarTheme: AppBarTheme(color: Colors.black12),
+          textTheme: TextTheme(body1: TextStyle(color: Colors.white24))),
+      themeMode: ThemeMode.light,
+      debugShowCheckedModeBanner: false,
       home: MultiCubitProvider(
         providers: [
           CubitProvider<MainCubit>(
@@ -38,7 +49,7 @@ class MainPage extends StatelessWidget {
           'Белореченский урбанист',
           style: TextStyle(color: Colors.grey),
         ),
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.white,
       ),
       body: CubitBuilder<NavigationCubit, NavigationState>(
         builder: (_, navState) {
@@ -60,7 +71,7 @@ class MainPage extends StatelessWidget {
           backgroundColor: Colors.white,
           color: Colors.grey,
           activeColor: Colors.grey,
-          initialActiveIndex: 2,
+          initialActiveIndex: 0,
           onTap: context.cubit<NavigationCubit>().changePage,
         );
       }),

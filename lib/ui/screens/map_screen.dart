@@ -34,7 +34,10 @@ class MapScreen extends StatelessWidget {
                   margin: EdgeInsets.all(12),
                 ),
                 SizedBox(height: 24),
-                Container(height: 200, child: PhotoSlider()),
+                Container(
+                    height: 200,
+                    //padding: EdgeInsets.all(8),
+                    child: PhotoSlider()),
                 Text("This is the sliding Widget"),
                 Text("This is the sliding Widget"),
               ]),

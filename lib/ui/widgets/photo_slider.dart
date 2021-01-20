@@ -29,7 +29,7 @@ class PhotoSlider extends StatelessWidget {
                   height: 200,
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(color: Colors.amber),
+                  decoration: BoxDecoration(color: Colors.grey),
                   child: Text(
                     'text $i',
                     style: TextStyle(fontSize: 16.0),
