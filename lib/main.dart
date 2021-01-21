@@ -42,22 +42,24 @@ class MyApp extends StatelessWidget {
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = [NewsScreen(), MapScreen(), SettingsScreen()];
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
         title: const Text(
           'Белореченский урбанист',
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: Colors.blueGrey),
         ),
         //backgroundColor: Colors.white,
       ),
       body: CubitBuilder<NavigationCubit, NavigationState>(
         builder: (_, navState) {
-          return navState.page == 1
+          return pages[navState.page];
+          /* navState.page == 1
               ? MapScreen()
               : navState.page == 0
                   ? NewsScreen()
-                  : SettingsScreen();
+                  : SettingsScreen(); */
         },
       ),
       bottomNavigationBar: CubitBuilder<NavigationCubit, NavigationState>(
@@ -69,8 +71,8 @@ class MainPage extends StatelessWidget {
             TabItem(icon: Icons.settings, title: 'Настройки'),
           ],
           backgroundColor: Colors.white,
-          color: Colors.grey,
-          activeColor: Colors.grey,
+          color: Colors.blueGrey,
+          activeColor: Colors.blueGrey,
           initialActiveIndex: 0,
           onTap: context.cubit<NavigationCubit>().changePage,
         );

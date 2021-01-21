@@ -27,7 +27,7 @@ class MapScreen extends StatelessWidget {
               child: Column(children: [
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.grey,
+                      color: Colors.blueGrey,
                       borderRadius: BorderRadius.all(Radius.circular(40))),
                   height: 4,
                   width: MediaQuery.of(context).size.width * 0.8,

@@ -17,6 +17,9 @@ dependencies:
   cupertino_icons: ^1.0.0
   flutter_custom_clippers: ^1.1.2
   tiktoklikescroller: ^0.1.1
+  flutter_scroll_gallery: ^0.1.1
+  image_viewer: ^1.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
