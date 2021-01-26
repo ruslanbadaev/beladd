@@ -5,12 +5,15 @@ import 'package:beladd/cubit/navigation_cubit.dart';
 import 'package:beladd/ui/widgets/photo_slider.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:full_screen_image/full_screen_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
 
 class MapScreen extends StatelessWidget {
   final String text;
   BorderRadiusGeometry radius = BorderRadius.only(
-    topLeft: Radius.circular(24.0),
-    topRight: Radius.circular(24.0),
+    topLeft: Radius.circular(36.0),
+    topRight: Radius.circular(36.0),
   );
   MapScreen({this.text}) : super();
 
@@ -27,19 +30,28 @@ class MapScreen extends StatelessWidget {
               child: Column(children: [
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.blueGrey,
                       borderRadius: BorderRadius.all(Radius.circular(40))),
                   height: 4,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  margin: EdgeInsets.all(12),
+                  margin: EdgeInsets.only(top: 12, bottom: 24),
+                  child: Icon(Icons.view_carousel, color: Colors.blueGrey),
                 ),
+                /*          Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.all(Radius.circular(40))),
+                    height: 4,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.2,
+                        top: 24)),  */
                 SizedBox(height: 24),
                 Container(
                     height: 200,
                     //padding: EdgeInsets.all(8),
                     child: PhotoSlider()),
-                Text("This is the sliding Widget"),
-                Text("This is the sliding Widget"),
+                SizedBox(height: 8),
+                Text("Some text"),
+                Text("Some text"),
               ]),
             ),
             body: new FlutterMap(

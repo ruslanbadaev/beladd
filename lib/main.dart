@@ -3,6 +3,7 @@ import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:beladd/cubit/main_cubit.dart';
 import 'package:beladd/cubit/navigation_cubit.dart';
 import 'package:beladd/ui/screens/news_screen.dart';
+import 'package:beladd/ui/screens/outrage_screen.dart';
 import 'package:beladd/ui/screens/map_screen.dart';
 import 'package:beladd/ui/screens/settings_screen.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -42,7 +43,12 @@ class MyApp extends StatelessWidget {
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Widget> pages = [NewsScreen(), MapScreen(), SettingsScreen()];
+    List<Widget> pages = [
+      MapScreen(),
+      OutrageScreen(),
+      NewsScreen(),
+      SettingsScreen()
+    ];
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
@@ -66,11 +72,14 @@ class MainPage extends StatelessWidget {
           builder: (context, state) {
         return ConvexAppBar(
           items: [
-            TabItem(icon: Icons.account_tree, title: 'Новости'),
-            TabItem(icon: Icons.map, title: 'Карта'),
-            TabItem(icon: Icons.settings, title: 'Настройки'),
+            TabItem(icon: Icons.place_rounded, title: 'Карта'),
+            TabItem(icon: Icons.menu_book_rounded, title: 'Нарушения'),
+            TabItem(icon: Icons.wysiwyg_rounded, title: 'Новости'),
+            TabItem(icon: Icons.plumbing_rounded, title: 'Настройки'),
           ],
+          style: TabStyle.flip,
           backgroundColor: Colors.white,
+          //cornerRadius: 56,
           color: Colors.blueGrey,
           activeColor: Colors.blueGrey,
           initialActiveIndex: 0,
