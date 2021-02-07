@@ -23,7 +23,13 @@ dependencies:
   pinch_zoom: ^0.0.4
   galleryimage: ^1.0.2
   polls: ^0.2.2
-  
+  simple_animations: ^2.5.0
+  dio: ^3.0.10
+  shared_preferences: ^0.5.12+4
+  #google_maps_flutter: ^1.2.0
+  #interactive_maps_marker: ^0.0.3
+  #cupertino_fullscreen_modal: ^0.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

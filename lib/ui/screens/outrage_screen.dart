@@ -7,6 +7,7 @@ import 'package:full_screen_image/full_screen_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:galleryimage/galleryimage.dart';
+//import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class OutrageScreen extends StatelessWidget {
   final String text;
