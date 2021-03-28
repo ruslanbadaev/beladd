@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:beladd/cubit/navigation_cubit.dart';
+import 'package:beladd/cubit/navigation.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen() : super();
