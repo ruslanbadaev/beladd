@@ -63,6 +63,7 @@ class MapCubit extends Cubit<MapState> {
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String token = prefs.getString('token');
+      print('token::: $token');
       dio.options.headers["authorization"] = "Bearer $token";
       Response response = await dio.get('http://134.0.117.33:3000/reports/all',
           options: Options(
@@ -92,7 +93,7 @@ class MapCubit extends Cubit<MapState> {
                       content: Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(4.0)),
+                              borderRadius: BorderRadius.circular(8.0)),
                           padding: EdgeInsets.all(24),
                           child: Text(
                             '${report['text']}',
