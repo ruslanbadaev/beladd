@@ -1,27 +1,30 @@
-import 'package:beladd/ui/screens/auth.dart';
+import 'package:urban_control/ui/screens/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:beladd/middleware/error.dart';
-import 'package:beladd/cubit/main.dart';
-import 'package:beladd/cubit/navigation.dart';
-import 'package:beladd/cubit/auth.dart';
-import 'package:beladd/cubit/map.dart';
-import 'package:beladd/cubit/report.dart';
-import 'package:beladd/cubit/reports.dart';
-import 'package:beladd/cubit/ads.dart';
+import 'package:urban_control/middleware/error.dart';
+import 'package:urban_control/cubit/main.dart';
+import 'package:urban_control/cubit/navigation.dart';
+import 'package:urban_control/cubit/auth.dart';
+import 'package:urban_control/cubit/map.dart';
+import 'package:urban_control/cubit/report.dart';
+import 'package:urban_control/cubit/reports.dart';
+import 'package:urban_control/cubit/ads.dart';
+import 'package:urban_control/controllers/settings.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:beladd/ui/screens/ads.dart';
-import 'package:beladd/ui/screens/reports.dart';
-import 'package:beladd/ui/screens/map.dart';
-import 'package:beladd/ui/screens/settings.dart';
+import 'package:urban_control/ui/screens/ads.dart';
+import 'package:urban_control/ui/screens/reports.dart';
+import 'package:urban_control/ui/screens/map.dart';
+import 'package:urban_control/ui/screens/settings.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 
-void main() async => {print(123), runApp(Phoenix(child: MyApp()))};
+void main() async => {runApp(GetMaterialApp(home: Phoenix(child: MyApp())))};
 
 class MyApp extends StatelessWidget {
+  final settingsController = Get.put(SettingsController());
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,7 +32,10 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         appBarTheme: AppBarTheme(color: Colors.white),
         textTheme: GoogleFonts.comfortaaTextTheme(
-          Theme.of(context).textTheme.apply(bodyColor: Colors.blueGrey),
+          Theme.of(context).textTheme.apply(
+              //fontSizeFactor: settingsController.size,
+              //fontSizeDelta: 1,
+              bodyColor: Colors.blueGrey),
         ),
       ),
       darkTheme: ThemeData(
@@ -55,8 +61,11 @@ class MyApp extends StatelessWidget {
           CubitProvider<ReportCubit>(
             create: (BuildContext context) => ReportCubit(),
           ),
-          CubitProvider<ReportsListCubit>(
+/*           CubitProvider<ReportsListCubit>(
             create: (BuildContext context) => ReportsListCubit(),
+          ), */
+          CubitProvider<ReportsCubit>(
+            create: (BuildContext context) => ReportsCubit(),
           ),
           CubitProvider<AdsCubit>(
             create: (BuildContext context) => AdsCubit(),
@@ -119,11 +128,16 @@ class MainNavBar extends StatelessWidget {
           initialActiveIndex: 0,
           onTap: (index) => {
                 if (index == 0)
-                  context.cubit<MapCubit>().getAllMarkers({'context': context}),
+                  {
+                    context
+                        .cubit<MapCubit>()
+                        .getAllMarkers({'context': context}),
+                    context.cubit<MapCubit>().removeMarker()
+                  },
                 if (index == 1)
                   context
-                      .cubit<ReportsListCubit>()
-                      .getReports({'context': context}),
+                      .cubit<ReportsCubit>()
+                      .getAds({'context': context, 'isReload': true}),
                 if (index == 2)
                   context
                       .cubit<AdsCubit>()

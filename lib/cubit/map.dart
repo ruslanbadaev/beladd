@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cubit/cubit.dart';
 import 'package:dio/dio.dart';
-import 'package:beladd/middleware/error.dart';
+import 'package:urban_control/middleware/error.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
-import 'package:beladd/middleware/error.dart';
-import 'package:beladd/ui/widgets/photo_slider.dart';
+import 'package:urban_control/middleware/error.dart';
+import 'package:urban_control/ui/widgets/photo_slider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ndialog/ndialog.dart';
 
@@ -83,7 +83,7 @@ class MapCubit extends Cubit<MapState> {
               InkWell(
                 onTap: () => DialogBackground(
                   dialog: AlertDialog(
-                      backgroundColor: Colors.white.withOpacity(.5),
+                      backgroundColor: Colors.white.withOpacity(1),
                       title: Container(
                           height: 280,
                           child: PhotoSlider(
@@ -102,7 +102,11 @@ class MapCubit extends Cubit<MapState> {
                 ).show(args['context']),
                 child: Icon(
                   Icons.place_rounded,
-                  color: Colors.red,
+                  color: report['title'] == 'illegal'
+                      ? Colors.red
+                      : report['title'] == 'legal'
+                          ? Colors.blue
+                          : Colors.orange,
                   size: 48,
                 ),
               ),

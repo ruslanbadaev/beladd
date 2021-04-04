@@ -1,6 +1,6 @@
 import 'package:cubit/cubit.dart';
 import 'package:dio/dio.dart';
-import 'package:beladd/middleware/error.dart';
+import 'package:urban_control/middleware/error.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:latlong/latlong.dart';
@@ -22,7 +22,7 @@ class ReportState {
 }
 
 class ReportCubit extends Cubit<ReportState> {
-  ReportCubit() : super(ReportState([], null, '', 1, LatLng(0, 0), ''));
+  ReportCubit() : super(ReportState([], null, '', 1, LatLng(0, 0), 'illegal'));
   Dio dio = new Dio();
 
   // context, description
@@ -32,7 +32,13 @@ class ReportCubit extends Cubit<ReportState> {
       String token = prefs.getString('token');
       String creator = prefs.getString('name');
       if (token == null) Phoenix.rebirth(args['context']);
-
+      print({
+        'title': state.type ?? 'illegal',
+        'text': args['description'].toString(),
+        'creator': creator ?? 'Аноним',
+        'longitude': state.latLong.longitude.toString(),
+        'latitude': state.latLong.latitude.toString()
+      });
       var headers = {'Authorization': 'Bearer $token'};
       var request = http.MultipartRequest(
           'POST', Uri.parse('http://134.0.117.33:3000/reports'));
@@ -43,6 +49,7 @@ class ReportCubit extends Cubit<ReportState> {
         'longitude': state.latLong.longitude.toString(),
         'latitude': state.latLong.latitude.toString()
       });
+
       for (File file in state.images)
         request.files.add(await http.MultipartFile.fromPath('', file.path));
 
@@ -58,13 +65,13 @@ class ReportCubit extends Cubit<ReportState> {
       } else {
         EasyLoading.showError('Ошибка. Повторите запрос позже.');
         EasyLoading.dismiss();
-        print(response.reasonPhrase);
+        print('1::: ${response.reasonPhrase}');
       }
     } catch (e) {
       EasyLoading.showError('Ошибка. Повторите запрос позже.');
       EasyLoading.dismiss();
       Error().checkConnection(args['context']);
-      print(e);
+      print('2::: $e');
 
       emit(ReportState(state.images, state.token, state.adress, state.tab,
           state.latLong, state.type));

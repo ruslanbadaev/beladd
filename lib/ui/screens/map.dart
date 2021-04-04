@@ -1,10 +1,10 @@
-import 'package:beladd/cubit/map.dart';
+import 'package:urban_control/cubit/map.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:cupertino_radio_choice/cupertino_radio_choice.dart';
-import 'package:beladd/cubit/report.dart';
-import 'package:beladd/cubit/reports.dart';
+import 'package:urban_control/cubit/report.dart';
+import 'package:urban_control/cubit/reports.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,7 +23,7 @@ class MapScreen extends StatelessWidget {
     TextEditingController descriptionController = TextEditingController();
 
     return CubitBuilder<MapCubit, MapState>(builder: (mapContext, mapState) {
-      return CubitBuilder<ReportsListCubit, ReportsListState>(
+      return CubitBuilder<ReportsCubit, ReportsState>(
           builder: (reportsListContext, reportsListState) {
         return Scaffold(
           body: SlidingUpPanel(
@@ -159,7 +159,78 @@ class MapScreen extends StatelessWidget {
                     )
                   ],
                 )
-              : Container(),
+              : Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 24,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 21),
+                        child: Row(
+                          children: [
+                            /*      Icon(
+                              Icons.place_rounded,
+                              color: Colors.blue,
+                            ), */
+                            Text(
+                              'Рекламные сооружения:',
+                              style: TextStyle(
+                                  color: Colors.blueGrey,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 18),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.place_rounded,
+                              color: Colors.blue,
+                            ),
+                            Text(
+                              'Легальные',
+                              style: TextStyle(color: Colors.blueGrey),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 18),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.place_rounded,
+                              color: Colors.red,
+                            ),
+                            Text(
+                              'Нелегальные',
+                              style: TextStyle(color: Colors.blueGrey),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 18),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.place_rounded,
+                              color: Colors.orange,
+                            ),
+                            Text(
+                              'Ветхие',
+                              style: TextStyle(color: Colors.blueGrey),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
         );
       });
     });

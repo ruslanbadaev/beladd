@@ -1,8 +1,8 @@
 import 'package:cubit/cubit.dart';
 import 'package:dio/dio.dart';
-import 'package:beladd/middleware/error.dart';
-import 'package:beladd/middleware/storage.dart';
-import 'package:beladd/middleware/constants.dart';
+import 'package:urban_control/middleware/error.dart';
+import 'package:urban_control/middleware/storage.dart';
+import 'package:urban_control/middleware/constants.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class AuthState {

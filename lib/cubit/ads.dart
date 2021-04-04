@@ -1,8 +1,8 @@
 import 'package:cubit/cubit.dart';
 import 'package:dio/dio.dart';
-import 'package:beladd/middleware/error.dart';
+import 'package:urban_control/middleware/error.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:beladd/models/ad.dart';
+import 'package:urban_control/models/ad.dart';
 
 class AdsState {
   final List<Ad> ads;

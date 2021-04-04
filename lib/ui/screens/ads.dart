@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:beladd/cubit/ads.dart';
-import 'package:beladd/models/ad.dart';
-import 'package:beladd/ui/widgets/photo_slider.dart';
+import 'package:urban_control/cubit/ads.dart';
+import 'package:urban_control/models/ad.dart';
+import 'package:urban_control/ui/widgets/photo_slider.dart';
 import 'package:polls/polls.dart';
 import 'package:pagination/pagination.dart';
 
@@ -33,10 +33,12 @@ class AdsScreen extends StatelessWidget {
           itemBuilder: (BuildContext context, Ad item) {
             return ListTile(
               title: item.photos.length > 0
-                  ? PhotoSlider(
-                      autoPlay: false,
-                      enableInfiniteScroll: false,
-                      photos: item.photos)
+                  ? Container(
+                      margin: EdgeInsets.only(top: 16),
+                      child: PhotoSlider(
+                          autoPlay: false,
+                          enableInfiniteScroll: false,
+                          photos: item.photos))
                   : Container(
                       height: MediaQuery.of(context).size.height * 0.4,
                       child: Icon(
@@ -64,15 +66,21 @@ class AdsScreen extends StatelessWidget {
                     item.vote != null && item.vote['options'].length > 0
                         ? Polls(
                             children: [
-                              Polls.options(title: 'Да', value: 8),
+                              for (Map option in item.vote['options'])
+                                Polls.options(
+                                    title: option['title'],
+                                    value: option['value'])
+/*                               Polls.options(title: 'Да', value: 8),
                               Polls.options(title: 'Нет', value: 3),
                               Polls.options(title: 'Наверное', value: 2),
-                              Polls.options(title: 'Да нет наверное', value: 6),
+                              Polls.options(title: 'Да нет наверное', value: 6), */
                             ],
-                            question: Text('Тестовый опрос'),
+                            question: Text(
+                                /* 'Тестовый опрос' */ item.vote['question']),
                             currentUser: 'user',
-                            creatorID: 'this.creator',
-                            voteData: {'user2': 1, 'user1': 2},
+                            creatorID: item.vote['creatorID'],
+                            voteData: item.vote[
+                                'voteData'] /* {'user2': 1, 'user1': 2} */,
                             userChoice: 2,
                             leadingPollStyle: TextStyle(color: Colors.white),
                             pollStyle: TextStyle(color: Colors.white),

@@ -1,54 +1,66 @@
 import 'package:cubit/cubit.dart';
 import 'package:dio/dio.dart';
-import 'package:beladd/middleware/error.dart';
+import 'package:urban_control/middleware/error.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:beladd/models/report.dart';
+import 'package:urban_control/models/report.dart';
 
-class ReportsListState {
-  final List<Report> reports;
+class ReportsState {
+  final List<Report> ads;
   final int index;
-  ReportsListState(this.reports, this.index);
+  ReportsState(this.ads, this.index);
 }
 
-class ReportsListCubit extends Cubit<ReportsListState> {
-  ReportsListCubit() : super(ReportsListState([], 0));
+class ReportsCubit extends Cubit<ReportsState> {
+  ReportsCubit() : super(ReportsState([], 1));
   Dio dio = new Dio();
 
-  Future getReports(args) async {
+  Future getAds(args) async {
     try {
-      List<Report> reports = [];
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String token = prefs.getString('token');
-      dio.options.headers["authorization"] = "Bearer $token";
-      Response response = await dio.get('http://134.0.117.33:3000/reports',
-          options: Options(
-              followRedirects: false,
-              validateStatus: (status) {
-                return status < 500;
-              }));
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        for (Map report in response.data['docs']) {
-          reports.add(Report(
-            title: report['title'],
-            text: report['text'],
-            creator: report['creator'],
-            date: report['updatedAt'],
-            photos: report['files'],
-          ));
-        }
+      List<Report> ads = [];
+      if (args['isReload']) {
+        emit(ReportsState([], 1));
+      }
 
-        emit(ReportsListState(reports, state.index));
-        return true;
+      if (state.index != null) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String token = prefs.getString('token');
+        dio.options.headers["authorization"] = "Bearer $token";
+
+        Response response = await dio.get(
+            'http://134.0.117.33:3000/reports/?page=${state.index}',
+            options: Options(
+                followRedirects: false,
+                validateStatus: (status) {
+                  return status < 500;
+                }));
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          for (Map report in response.data['docs']) {
+            ads.add(Report(
+              title: report['title'],
+              text: report['text'],
+              creator: report['creator'],
+              date: report['createdAt'],
+              photos: report['files'],
+            ));
+          }
+
+          emit(ReportsState(ads, response.data['nextPage']));
+          return ads;
+        } else
+          Error().checkRequestError(
+              args['context'],
+              response.statusCode,
+              getAds,
+              {'context': args['context'], 'isReload': args['isReload']});
+
+        return ads;
       } else
-        Error().checkRequestError(args['context'], response.statusCode,
-            getReports, {'context': args['context']});
-      return false;
+        return ads;
     } catch (e) {
       print(e);
       Error().checkConnection(args['context']);
-      return false;
+      return state.ads;
     }
   }
-
-  Future setPoll(args) async {}
 }
