@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cubit/cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:urban_control/middleware/error.dart';
+import 'package:urban_control/middleware/constants.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
-import 'package:urban_control/middleware/error.dart';
 import 'package:urban_control/ui/widgets/photo_slider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ndialog/ndialog.dart';
@@ -30,7 +30,6 @@ class MapCubit extends Cubit<MapState> {
         ], {}, false));
 
   void setMarker(point) {
-    print(point);
     List<Marker> x = state.markers;
     x[0] = new Marker(
       width: 96.0,
@@ -63,9 +62,8 @@ class MapCubit extends Cubit<MapState> {
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String token = prefs.getString('token');
-      print('token::: $token');
       dio.options.headers["authorization"] = "Bearer $token";
-      Response response = await dio.get('http://134.0.117.33:3000/reports/all',
+      Response response = await dio.get('$API_URL/reports/all',
           options: Options(
               followRedirects: false,
               validateStatus: (status) {
@@ -122,7 +120,7 @@ class MapCubit extends Cubit<MapState> {
         return markers;
       }
     } catch (e) {
-      print(e);
+      print('getAllMarkers error: $e');
       Error().checkConnection(args['context']);
       return [];
     }

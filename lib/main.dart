@@ -1,3 +1,4 @@
+import 'package:urban_control/controllers/profile.dart';
 import 'package:urban_control/ui/screens/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
@@ -25,6 +26,7 @@ void main() async => {runApp(GetMaterialApp(home: Phoenix(child: MyApp())))};
 
 class MyApp extends StatelessWidget {
   final settingsController = Get.put(SettingsController());
+  final profileController = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -142,6 +144,7 @@ class MainNavBar extends StatelessWidget {
                   context
                       .cubit<AdsCubit>()
                       .getAds({'context': context, 'isReload': true}),
+                if (index == 3) {},
                 context.cubit<NavigationCubit>().changePage(index, false)
               });
     });
@@ -164,7 +167,7 @@ class AuthNavBar extends StatelessWidget {
         backgroundColor: Colors.white,
         color: Colors.blueGrey,
         activeColor: Colors.blueGrey,
-        initialActiveIndex: 0,
+        initialActiveIndex: 1,
         onTap: context.cubit<AuthCubit>().changeTab,
       );
     });
@@ -189,6 +192,9 @@ class MainPageState extends State<MainPage> {
   @override
   initState() {
     super.initState();
+    profileController.getName();
+    profileController.getEmail();
+    profileController.getId();
     checkAuth();
     new Future.delayed(Duration.zero, () {
       context.cubit<MapCubit>().getAllMarkers({'context': context});

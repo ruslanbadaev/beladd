@@ -15,11 +15,10 @@ class AuthState {
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthState(true, null, 1));
   Dio dio = new Dio();
-  // context, email, password
   Future login(args) async {
     try {
       Response response = await dio.post(
-        '$API_URL:$API_PORT/login',
+        '$API_URL/login',
         data: {'email': args['email'], 'password': args['password']},
         options: Options(
             followRedirects: false,
@@ -27,11 +26,13 @@ class AuthCubit extends Cubit<AuthState> {
               return status < 500;
             }),
       );
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         Storage().set('token', response.data['token']);
-        Storage().set('name', response.data['name']);
-        Storage().set('role', response.data['role']);
-        Storage().set('id', response.data['_id']);
+        Storage().set('name', response.data['user']['name']);
+        Storage().set('role', response.data['user']['role']);
+        Storage().set('email', response.data['user']['email']);
+        Storage().set('id', response.data['user']['_id']);
         emit(AuthState(true, response.data['token'], state.tab));
         Phoenix.rebirth(args['context']);
         return true;
@@ -41,10 +42,9 @@ class AuthCubit extends Cubit<AuthState> {
           'email': args['email'],
           'password': args['password']
         });
-      print('---');
       return false;
     } catch (e) {
-      print('\\\\');
+      print('login error: $e');
       Error().checkConnection(args['context']);
       emit(AuthState(false, state.token, state.tab));
       return false;
@@ -52,10 +52,10 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   // context, name, email, password
-  Future register(args) async {
+  Future registration(args) async {
     try {
       Response response = await dio.post(
-        '$API_URL:$API_PORT/register',
+        '$API_URL/register',
         data: {
           'name': args['name'],
           'email': args['email'],
@@ -69,16 +69,16 @@ class AuthCubit extends Cubit<AuthState> {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         Storage().set('token', response.data['token']);
-        Storage().set('name', response.data['name']);
-        Storage().set('role', response.data['role']);
-        Storage().set('id', response.data['_id']);
+        Storage().set('name', response.data['user']['name']);
+        Storage().set('role', response.data['user']['role']);
+        Storage().set('email', response.data['user']['email']);
+        Storage().set('id', response.data['user']['_id']);
         emit(AuthState(true, response.data['token'], state.tab));
-        print('***');
         Phoenix.rebirth(args['context']);
         return true;
       } else
-        Error()
-            .checkRequestError(args['context'], response.statusCode, register, {
+        Error().checkRequestError(
+            args['context'], response.statusCode, registration, {
           'context': args['context'],
           'name': args['name'],
           'email': args['email'],
@@ -86,7 +86,7 @@ class AuthCubit extends Cubit<AuthState> {
         });
       return false;
     } catch (e) {
-      print(e);
+      print('registration error: $e');
       Error().checkConnection(args['context']);
       emit(AuthState(false, state.token, state.tab));
       return false;
@@ -94,6 +94,9 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void changeTab(index) => emit(AuthState(state.isAuth, state.token, index));
+
+  void logout(context) =>
+      {Storage().set('token', null), Phoenix.rebirth(context)};
 
   Future<bool> start() async {
     return false;

@@ -10,9 +10,7 @@ class Error {
   void checkConnection(context) async {
     try {
       final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        print('connected');
-      }
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
     } on SocketException catch (_) {
       CustomPrompt(
         color: Colors.blueGrey,
@@ -30,7 +28,6 @@ class Error {
   }
 
   void checkRequestError(context, statusCode, repeatFunction, args) async {
-    print(statusCode);
     switch (statusCode) {
       case 401:
         CustomPrompt(

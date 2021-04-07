@@ -18,13 +18,12 @@ class AuthScreen extends StatelessWidget {
         body: CubitBuilder<AuthCubit, AuthState>(builder: (context, navState) {
       return Container(
         decoration: BoxDecoration(
+          /**
           gradient: LinearGradient(
             tileMode: TileMode.mirror,
             begin: Alignment.topCenter,
             end: Alignment(0.8, 1.0),
             colors: [
-              /*      Color(0xfff44336),
-              Color(0xff2196f3), */
               Colors.blueGrey,
               Colors.blueGrey,
             ],
@@ -32,22 +31,11 @@ class AuthScreen extends StatelessWidget {
               0,
               1,
             ],
-          ),
+          ), 
+          */
+          color: Colors.blueGrey,
           backgroundBlendMode: BlendMode.srcOver,
         ),
-        //child: PlasmaRenderer(
-        /*       type: PlasmaType.infinity,
-          particles: 43,
-          color: Color(0xaf2b1cbd),
-          blur: 0.44,
-          size: 0.5830834600660535,
-          speed: 1.71,
-          offset: 0,
-          blendMode: BlendMode.plus,
-          variation1: 0.24,
-          variation2: 0.7,
-          variation3: 0.16,
-          rotation: 0, */
         child: Center(
           child: Container(
             height:
@@ -55,7 +43,7 @@ class AuthScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.9,
             padding: EdgeInsets.all(24),
             decoration: BoxDecoration(
-                color: Colors.white /* .withOpacity(.7) */,
+                color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(24))),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -120,7 +108,7 @@ class AuthScreen extends StatelessWidget {
                           'password': passwordController.text
                         });
                       else
-                        context.cubit<AuthCubit>().register({
+                        context.cubit<AuthCubit>().registration({
                           'context': context,
                           'name': nameController.text,
                           'email': emailController.text,
@@ -133,15 +121,9 @@ class AuthScreen extends StatelessWidget {
                     child: Ink(
                       decoration: BoxDecoration(
                           color: Colors.blueGrey,
-                          /*   gradient: LinearGradient(
-                            colors: [Colors.blue, Colors.pink[200]],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ), */
                           borderRadius: BorderRadius.circular(12.0)),
                       child: Container(
-                        constraints: BoxConstraints(
-                            /* maxWidth: 250.0,  */ minHeight: 50.0),
+                        constraints: BoxConstraints(minHeight: 50.0),
                         alignment: Alignment.center,
                         child: Text(
                           "Принять",
@@ -154,7 +136,6 @@ class AuthScreen extends StatelessWidget {
                 ]),
           ),
         ),
-        //),
       );
     }));
   }

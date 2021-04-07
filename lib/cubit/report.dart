@@ -1,8 +1,9 @@
+import 'dart:io';
 import 'package:cubit/cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:urban_control/middleware/error.dart';
+import 'package:urban_control/middleware/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io';
 import 'package:latlong/latlong.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,16 +33,9 @@ class ReportCubit extends Cubit<ReportState> {
       String token = prefs.getString('token');
       String creator = prefs.getString('name');
       if (token == null) Phoenix.rebirth(args['context']);
-      print({
-        'title': state.type ?? 'illegal',
-        'text': args['description'].toString(),
-        'creator': creator ?? 'Аноним',
-        'longitude': state.latLong.longitude.toString(),
-        'latitude': state.latLong.latitude.toString()
-      });
-      var headers = {'Authorization': 'Bearer $token'};
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('http://134.0.117.33:3000/reports'));
+      Map headers = {'Authorization': 'Bearer $token'};
+      var request =
+          http.MultipartRequest('POST', Uri.parse('$API_URL/reports'));
       request.fields.addAll({
         'title': state.type,
         'text': args['description'].toString(),
@@ -61,17 +55,15 @@ class ReportCubit extends Cubit<ReportState> {
         EasyLoading.showSuccess('Успех');
         EasyLoading.dismiss();
         Phoenix.rebirth(args['context']);
-        print(await response.stream.bytesToString());
       } else {
         EasyLoading.showError('Ошибка. Повторите запрос позже.');
         EasyLoading.dismiss();
-        print('1::: ${response.reasonPhrase}');
       }
     } catch (e) {
       EasyLoading.showError('Ошибка. Повторите запрос позже.');
       EasyLoading.dismiss();
       Error().checkConnection(args['context']);
-      print('2::: $e');
+      print('sendReport error: $e');
 
       emit(ReportState(state.images, state.token, state.adress, state.tab,
           state.latLong, state.type));
@@ -93,7 +85,7 @@ class ReportCubit extends Cubit<ReportState> {
       emit(ReportState(images, state.token, state.adress, state.tab,
           state.latLong, state.type));
     } catch (e) {
-      print(e);
+      print('addPhoto error $e');
     }
   }
 
@@ -109,7 +101,7 @@ class ReportCubit extends Cubit<ReportState> {
       emit(ReportState(images, state.token, state.adress, state.tab,
           state.latLong, state.type));
     } catch (e) {
-      print(e);
+      print('setLatLong error: $e');
     }
   }
 }

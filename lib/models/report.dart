@@ -1,4 +1,5 @@
 class Report {
+  String id;
   String title;
   String text;
   String creator;
@@ -6,6 +7,7 @@ class Report {
   List photos;
 
   Report({
+    this.id,
     this.title,
     this.text,
     this.creator,

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:urban_control/cubit/navigation.dart';
+import 'package:urban_control/middleware/constants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:full_screen_image/full_screen_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 
@@ -53,15 +51,11 @@ class PhotoSlider extends StatelessWidget {
                           child: PinchZoom(
                             image: FancyShimmerImage(
                               boxFit: BoxFit.cover,
-                              imageUrl:
-                                  'http://134.0.117.33:3000/${photo['path']}',
+                              imageUrl: '$API_URL/${photo['path']}',
                               shimmerBaseColor: Colors.white,
                               shimmerHighlightColor: Colors.blueGrey,
                               shimmerBackColor: Colors.orange,
-                            ) /* Image.network(
-                          'http://134.0.117.33:3000/${photo['path']}',
-                          fit: BoxFit.cover) */
-                            ,
+                            ),
                             zoomedBackgroundColor:
                                 Colors.black.withOpacity(0.5),
                             resetDuration: const Duration(milliseconds: 300),

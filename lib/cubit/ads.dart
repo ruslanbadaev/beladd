@@ -1,6 +1,7 @@
 import 'package:cubit/cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:urban_control/middleware/error.dart';
+import 'package:urban_control/middleware/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:urban_control/models/ad.dart';
 
@@ -26,13 +27,12 @@ class AdsCubit extends Cubit<AdsState> {
         String token = prefs.getString('token');
         dio.options.headers["authorization"] = "Bearer $token";
 
-        Response response =
-            await dio.get('http://134.0.117.33:3000/ads/?page=${state.index}',
-                options: Options(
-                    followRedirects: false,
-                    validateStatus: (status) {
-                      return status < 500;
-                    }));
+        Response response = await dio.get('$API_URL/ads/?page=${state.index}',
+            options: Options(
+                followRedirects: false,
+                validateStatus: (status) {
+                  return status < 500;
+                }));
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           for (Map report in response.data['docs']) {
@@ -40,7 +40,7 @@ class AdsCubit extends Cubit<AdsState> {
               id: report['_id'],
               title: report['title'],
               text: report['text'],
-              creator: report['creator'],
+              creator: prefs.getString('name') ?? 'Аноним',
               date: report['createdAt'],
               photos: report['files'],
             ));
@@ -59,7 +59,7 @@ class AdsCubit extends Cubit<AdsState> {
       } else
         return ads;
     } catch (e) {
-      print(e);
+      print('getAds error: $e');
       Error().checkConnection(args['context']);
       return state.ads;
     }
