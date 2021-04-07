@@ -55,7 +55,6 @@ class Error {
             transparent: true,
             context: context,
             btnOneText: Text('Ок'),
-            cancelBtnText: 'csdsadf',
             content: 'Ошибка запроса',
             btnOneOnClick: () => {},
             btnTwoOnClick: () => {}).alert();

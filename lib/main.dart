@@ -3,7 +3,6 @@ import 'package:urban_control/ui/screens/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:urban_control/middleware/error.dart';
-import 'package:urban_control/controllers/cubit/main.dart';
 import 'package:urban_control/controllers/cubit/navigation.dart';
 import 'package:urban_control/controllers/cubit/auth.dart';
 import 'package:urban_control/controllers/cubit/map.dart';
@@ -45,9 +44,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: MultiCubitProvider(
         providers: [
-          CubitProvider<MainCubit>(
-            create: (BuildContext context) => MainCubit(),
-          ),
           CubitProvider<NavigationCubit>(
             create: (BuildContext context) => NavigationCubit(),
           ),
