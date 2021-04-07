@@ -114,7 +114,7 @@ packages:
     source: hosted
     version: "0.1.2"
   cupertino_icons:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
@@ -202,13 +202,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
-  flutter_custom_clippers:
-    dependency: "direct main"
-    description:
-      name: flutter_custom_clippers
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.2"
   flutter_easyloading:
     dependency: "direct main"
     description:
@@ -252,7 +245,7 @@ packages:
     source: hosted
     version: "0.5.7"
   flutter_spinkit:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_spinkit
       url: "https://pub.dartlang.org"
@@ -279,13 +272,6 @@ packages:
     dependency: "direct main"
     description:
       name: full_screen_image
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
-  galleryimage:
-    dependency: "direct main"
-    description:
-      name: galleryimage
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
@@ -338,13 +324,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
-  image_viewer:
-    dependency: "direct main"
-    description:
-      name: image_viewer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   intl:
     dependency: transitive
     description:
@@ -492,13 +471,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
-  photo_view:
-    dependency: transitive
-    description:
-      name: photo_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.2"
   pinch_zoom:
     dependency: "direct main"
     description:
@@ -721,13 +693,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.19"
-  tiktoklikescroller:
-    dependency: "direct main"
-    description:
-      name: tiktoklikescroller
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.1"
   transparent_image:
     dependency: transitive
     description:
@@ -777,13 +742,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  very_good_infinite_list:
-    dependency: "direct main"
-    description:
-      name: very_good_infinite_list
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1"
   win32:
     dependency: transitive
     description:

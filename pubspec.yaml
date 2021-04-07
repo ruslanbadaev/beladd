@@ -14,26 +14,15 @@ dependencies:
   convex_bottom_bar: ^2.6.0
   sliding_up_panel: ^1.0.2
   carousel_slider: ^2.3.1
-  cupertino_icons: ^1.0.0
-  flutter_custom_clippers: ^1.1.2
-  tiktoklikescroller: ^0.1.1
-  #flutter_scroll_gallery: ^0.1.1
-  image_viewer: ^1.0.0
   full_screen_image: ^1.0.2
   pinch_zoom: ^0.0.4
-  galleryimage: ^1.0.2
   polls: ^0.2.2
   simple_animations: ^2.5.0
   dio: ^3.0.10
   shared_preferences: ^0.5.12+4
-  #google_maps_flutter: ^1.2.0
-  #interactive_maps_marker: ^0.0.3
-  #cupertino_fullscreen_modal: ^0.0.1
   cupertino_radio_choice: ^1.0.1+1
   image_picker: ^0.6.7+22
   google_fonts: ^1.1.2
-  very_good_infinite_list: ^0.2.1
-  flutter_spinkit: "^4.1.2"
   pagination: ^0.1.0
   flutter_easyloading: ^2.2.2
   customprompt: ^0.2.6+9
