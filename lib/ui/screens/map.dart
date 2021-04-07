@@ -1,10 +1,10 @@
-import 'package:urban_control/cubit/map.dart';
+import 'package:urban_control/controllers/cubit/map.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:cupertino_radio_choice/cupertino_radio_choice.dart';
-import 'package:urban_control/cubit/report.dart';
-import 'package:urban_control/cubit/reports.dart';
+import 'package:urban_control/controllers/cubit/report.dart';
+import 'package:urban_control/controllers/cubit/reports.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:image_picker/image_picker.dart';

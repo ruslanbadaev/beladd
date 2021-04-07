@@ -3,13 +3,13 @@ import 'package:urban_control/ui/screens/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:urban_control/middleware/error.dart';
-import 'package:urban_control/cubit/main.dart';
-import 'package:urban_control/cubit/navigation.dart';
-import 'package:urban_control/cubit/auth.dart';
-import 'package:urban_control/cubit/map.dart';
-import 'package:urban_control/cubit/report.dart';
-import 'package:urban_control/cubit/reports.dart';
-import 'package:urban_control/cubit/ads.dart';
+import 'package:urban_control/controllers/cubit/main.dart';
+import 'package:urban_control/controllers/cubit/navigation.dart';
+import 'package:urban_control/controllers/cubit/auth.dart';
+import 'package:urban_control/controllers/cubit/map.dart';
+import 'package:urban_control/controllers/cubit/report.dart';
+import 'package:urban_control/controllers/cubit/reports.dart';
+import 'package:urban_control/controllers/cubit/ads.dart';
 import 'package:urban_control/controllers/settings.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:urban_control/ui/screens/ads.dart';
@@ -34,10 +34,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         appBarTheme: AppBarTheme(color: Colors.white),
         textTheme: GoogleFonts.comfortaaTextTheme(
-          Theme.of(context).textTheme.apply(
-              //fontSizeFactor: settingsController.size,
-              //fontSizeDelta: 1,
-              bodyColor: Colors.blueGrey),
+          Theme.of(context).textTheme.apply(bodyColor: Colors.blueGrey),
         ),
       ),
       darkTheme: ThemeData(
@@ -63,9 +60,6 @@ class MyApp extends StatelessWidget {
           CubitProvider<ReportCubit>(
             create: (BuildContext context) => ReportCubit(),
           ),
-/*           CubitProvider<ReportsListCubit>(
-            create: (BuildContext context) => ReportsListCubit(),
-          ), */
           CubitProvider<ReportsCubit>(
             create: (BuildContext context) => ReportsCubit(),
           ),
@@ -139,7 +133,7 @@ class MainNavBar extends StatelessWidget {
                 if (index == 1)
                   context
                       .cubit<ReportsCubit>()
-                      .getAds({'context': context, 'isReload': true}),
+                      .getReports({'context': context, 'isReload': true}),
                 if (index == 2)
                   context
                       .cubit<AdsCubit>()

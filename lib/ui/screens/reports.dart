@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:urban_control/cubit/reports.dart';
+import 'package:urban_control/controllers/cubit/reports.dart';
 import 'package:urban_control/models/report.dart';
 import 'package:urban_control/ui/widgets/photo_slider.dart';
-import 'package:polls/polls.dart';
 import 'package:pagination/pagination.dart';
 import 'package:get/get.dart';
 import 'package:urban_control/controllers/profile.dart';
@@ -22,7 +21,7 @@ class ReportsScreen extends StatelessWidget {
     Future<List<Report>> _itemLoader(contet, a) async {
       List data = await context
           .cubit<ReportsCubit>()
-          .getAds({'contxt': context, 'isReload': false});
+          .getReports({'contxt': context, 'isReload': false});
 
       return data;
     }

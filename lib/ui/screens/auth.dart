@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:urban_control/cubit/auth.dart';
+import 'package:urban_control/controllers/cubit/auth.dart';
 
 class AuthScreen extends StatelessWidget {
   final String login;

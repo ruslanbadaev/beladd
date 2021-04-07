@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/flutter_cubit.dart';
-import 'package:urban_control/cubit/ads.dart';
+import 'package:urban_control/controllers/cubit/ads.dart';
 import 'package:urban_control/models/ad.dart';
 import 'package:urban_control/ui/widgets/photo_slider.dart';
 import 'package:polls/polls.dart';

@@ -19,7 +19,7 @@ class ReportsCubit extends Cubit<ReportsState> {
   ReportsCubit() : super(ReportsState([], 1));
   Dio dio = new Dio();
   final ProfileController profileController = getx.Get.put(ProfileController());
-  Future getAds(args) async {
+  Future getReports(args) async {
     try {
       List<Report> ads = [];
       if (args['isReload']) {
@@ -57,14 +57,14 @@ class ReportsCubit extends Cubit<ReportsState> {
           Error().checkRequestError(
               args['context'],
               response.statusCode,
-              getAds,
+              getReports,
               {'context': args['context'], 'isReload': args['isReload']});
 
         return ads;
       } else
         return ads;
     } catch (e) {
-      print('getAds error: $e');
+      print('getReports error: $e');
       Error().checkConnection(args['context']);
       return state.ads;
     }
