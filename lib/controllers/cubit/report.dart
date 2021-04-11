@@ -33,9 +33,10 @@ class ReportCubit extends Cubit<ReportState> {
       String token = prefs.getString('token');
       String creator = prefs.getString('name');
       if (token == null) Phoenix.rebirth(args['context']);
-      Map headers = {'Authorization': 'Bearer $token'};
+      Map<String, String> headers = {'Authorization': 'Bearer $token'};
       var request =
           http.MultipartRequest('POST', Uri.parse('$API_URL/reports'));
+      print(headers.toString());
       request.fields.addAll({
         'title': state.type,
         'text': args['description'].toString(),
@@ -50,7 +51,7 @@ class ReportCubit extends Cubit<ReportState> {
       request.headers.addAll(headers);
       EasyLoading.show(status: 'Отправка...');
       http.StreamedResponse response = await request.send();
-
+      print(response);
       if (response.statusCode == 200 || response.statusCode == 201) {
         EasyLoading.showSuccess('Успех');
         EasyLoading.dismiss();

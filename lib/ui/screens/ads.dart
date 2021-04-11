@@ -17,7 +17,7 @@ class AdsScreen extends StatelessWidget {
     Future<List<Ad>> _itemLoader(contet, a) async {
       List data = await context
           .cubit<AdsCubit>()
-          .getAds({'contxt': context, 'isReload': false});
+          .getAds({'context': context, 'isReload': false});
 
       return data;
     }

@@ -5,6 +5,7 @@ import 'package:urban_control/models/report.dart';
 import 'package:urban_control/ui/widgets/photo_slider.dart';
 import 'package:pagination/pagination.dart';
 import 'package:get/get.dart';
+import 'package:customprompt/customprompt.dart';
 import 'package:urban_control/controllers/profile.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ndialog/ndialog.dart';
@@ -21,7 +22,7 @@ class ReportsScreen extends StatelessWidget {
     Future<List<Report>> _itemLoader(contet, a) async {
       List data = await context
           .cubit<ReportsCubit>()
-          .getReports({'contxt': context, 'isReload': false});
+          .getReports({'context': context, 'isReload': false});
 
       return data;
     }
@@ -131,8 +132,38 @@ class ReportsScreen extends StatelessWidget {
                         color: Colors.red,
                         icon: Icons.delete,
                         onTap: () => {
-                          context.cubit<ReportsCubit>().removeReport(
-                              {'context': context, 'id': item.id}),
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext alertContext) {
+                                return AlertDialog(
+                                  title: Text('Удаление'),
+                                  content: Text(
+                                      'Вы действительно хотите удалить запись?'),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text(
+                                        "Удалить",
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                      onPressed: () {
+                                        context
+                                            .cubit<ReportsCubit>()
+                                            .removeReport({
+                                          'context': context,
+                                          'id': item.id
+                                        });
+                                        Navigator.of(alertContext).pop();
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text("Отмена"),
+                                      onPressed: () {
+                                        Navigator.of(alertContext).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              }),
                         },
                       )
                     : IconSlideAction(
@@ -172,8 +203,9 @@ class ReportsScreen extends StatelessWidget {
                                     color: Colors.blueGrey.withOpacity(.6),
                                     onPressed: () {
                                       context.cubit<ReportsCubit>().setClaim({
-                                        'contxt': context,
-                                        'text': claimController.text
+                                        'context': context,
+                                        'text': claimController.text,
+                                        'postId': item.id
                                       });
                                     },
                                     shape: RoundedRectangleBorder(

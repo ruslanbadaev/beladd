@@ -102,8 +102,17 @@ class ReportsCubit extends Cubit<ReportsState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String token = prefs.getString('token');
       dio.options.headers["authorization"] = "Bearer $token";
-      Response response = await dio.post('$API_URL/reports/claim',
-          data: {'creator': profileController.email, 'text': args['text']},
+      print({
+        'creator': profileController.email,
+        'text': args['text'],
+        'postId': args['postId']
+      });
+      Response response = await dio.post('$API_URL/claim',
+          data: {
+            'creator': profileController.email,
+            'text': args['text'],
+            'postId': args['postId']
+          },
           options: Options(
               followRedirects: false,
               validateStatus: (status) {
