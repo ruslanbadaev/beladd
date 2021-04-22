@@ -1,5 +1,7 @@
 # Urban Control - Белореченск
 
+[Google Play link](https://play.google.com/store/apps/details?id=com.ruslanbadaev.urbancontrol)
+
 <div align="" style="border: 0px solid; border-radius:8px;">
     <img src="/screenshots/NghwFPSNVo0.jpg" width="400px"</img> 
 </div>
