@@ -1,4 +1,4 @@
-package com.example.beladd
+package com.ruslanbadaev.urbancontrol
 
 import io.flutter.embedding.android.FlutterActivity
 
