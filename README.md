@@ -1,6 +1,8 @@
 # Urban Control - Белореченск
 
 [Google Play link](https://play.google.com/store/apps/details?id=com.ruslanbadaev.urbancontrol)
+<br>
+<br>
 <i>
     This app is for the municipality of my city. Users can submit complaints about illegal advertising structures. You can also find out the news of the city.
 </i>
