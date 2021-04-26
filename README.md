@@ -25,3 +25,8 @@
 <div align="" style="border-radius:8px;">
     <img src="/screenshots/w-pYPLbVu6A-2.jpg" width="400px"</img> 
 </div>
+
+<i>
+
+This app is for the municipality of my city. Users can submit complaints about illegal advertising structures. You can also find out the news of the city.
+</i>
